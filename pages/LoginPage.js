@@ -4,7 +4,7 @@ export class LoginPage extends BasePage {
         super(page);
         this.emailInput = page.locator('#username');
         this.passwordInput = page.locator('#password');
-        this.loginButton - page.locator('.login-sep21__cta')
+        this.loginButton = page.locator('.login-sep21__cta')
         
     }
 
