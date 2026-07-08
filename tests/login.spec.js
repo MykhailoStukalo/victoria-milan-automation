@@ -1,5 +1,6 @@
 import {test} from '@playwright/test'
 import {LoginPage} from '../pages/LoginPage'
+import {CookieBanner} from '../pages/CookieBanner';
 test('Successful Login', async({page}) => {
 
 const loginPage = new LoginPage(page);
