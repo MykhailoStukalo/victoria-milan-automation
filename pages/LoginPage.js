@@ -6,6 +6,8 @@ export class LoginPage extends BasePage {
         this.passwordInput = page.locator('#password');
         this.loginButton = page.locator('.login-sep21__cta')
         
+
+        
     }
 
     async login(email, password) {
