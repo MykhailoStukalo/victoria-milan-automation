@@ -6,7 +6,7 @@ export class CookieBanner extends BasePage {
 
         this.acceptAllButton = page.locator('[data-cky-tag="accept-button"]')
     }
-    async acceptAllButton() {
+    async acceptCookies() {
         await this.acceptAllButton.click();
     }
 }
