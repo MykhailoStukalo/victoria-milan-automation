@@ -1,5 +1,4 @@
 import { BasePage } from './BasePage';
-import {CookieBanner} from '../pages/CookieBanner';
 export class LandingPage extends BasePage {
     constructor(page) {
         super(page);
