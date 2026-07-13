@@ -1,4 +1,5 @@
 import { BasePage } from './BasePage';
+import { RegistrationPage } from './RegistrationPage';
 export class LandingPage extends BasePage {
     constructor(page) {
         super(page);
@@ -6,6 +7,7 @@ export class LandingPage extends BasePage {
         this.languageSelector = page.locator('.header-desktop-top__lang_selector.button-country-selector');
         this.germanLanguageOption = page.locator('.country-selector-modal').getByText('Deutsch', {exact: true});
         this.germanMatchesCta = page.getByText('Sieh dir deine Matches an', {exact: true});
+        this.ctaButtons = page.locator('.button-sign-up');
 
 
     }
@@ -14,4 +16,6 @@ export class LandingPage extends BasePage {
     await this.loginButton.click();
 }
 }
+
+
 

@@ -11,8 +11,8 @@ await loginPage.open('https://www.victoriamilan.com/');
 await cookieBanner.acceptCookies();
 await landingPage.clickLogin();
 await loginPage.login(
-    'victoriamilanuser190922@gmail.com',
-    '123456789'
+     process.env.VM_USER_EMAIL,
+    process.env.VM_USER_PASSWORD
 );
 
 });

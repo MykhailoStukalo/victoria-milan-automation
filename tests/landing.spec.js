@@ -2,9 +2,11 @@
 import { test,expect } from '@playwright/test';
 import { LandingPage } from '../pages/LandingPage';
 import { CookieBanner } from '../pages/CookieBanner';
-import { LoginPage
+import { LoginPage } from '../pages/LoginPage';
+import { count } from 'node:console';
+import { RegistrationPage } from '../pages/RegistrationPage';
+import { execPath } from 'node:process';
 
- } from '../pages/LoginPage';
 test('TC-001 Verify Language Selector is displayed', async({page}) =>{
     const landingPage = new LandingPage(page);
 
@@ -45,3 +47,32 @@ test('TC-004 Verify user can navigate to Login Page', async({page}) => {
     await expect(loginPage.emailInput).toBeVisible();
     await expect(loginPage.passwordInput).toBeVisible();
 });
+
+test('TC-005 Verify all CTA buttons are displayed', async({page}) => {
+    const landingPage = new LandingPage(page);
+    await landingPage.open('https://www.victoriamilan.com/');
+    await expect(landingPage.ctaButtons).toHaveCount(5);
+    const buttonCount = await landingPage.ctaButtons.count();
+    for (let i = 0; i < buttonCount; i++) {
+        await expect(landingPage.ctaButtons.nth(i)).toBeVisible();
+    }
+}
+
+)
+
+test('TC-006 Verify each CTA button opens Registration Step 1', async({page}) => {
+    const landingPage = new LandingPage(page);
+    const registrationPage = new RegistrationPage (page);
+    const cookieBanner = new CookieBanner(page);
+    await landingPage.open('https://www.victoriamilan.com/');
+    await cookieBanner.acceptCookies();
+    for (let i = 0; i < 5; i++) {
+        await landingPage.open('https://www.victoriamilan.com/');
+        const currentCta = landingPage.ctaButtons.nth(i);
+        await currentCta.click();
+        await expect(page).toHaveURL(/welcome\/create-account/);
+        await expect(registrationPage.registrationTitle).toBeVisible();
+    }
+}
+
+)
