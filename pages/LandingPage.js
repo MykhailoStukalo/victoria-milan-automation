@@ -8,6 +8,7 @@ export class LandingPage extends BasePage {
         this.germanLanguageOption = page.locator('.country-selector-modal').getByText('Deutsch', {exact: true});
         this.germanMatchesCta = page.getByText('Sieh dir deine Matches an', {exact: true});
         this.ctaButtons = page.locator('.button-sign-up');
+        this.footerLinks = page.locator('.footer-desktop__links-col a');
 
 
     }
