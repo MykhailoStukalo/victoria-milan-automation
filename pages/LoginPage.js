@@ -9,6 +9,7 @@ export class LoginPage extends BasePage {
         this.joinVictoriaMilanbutton = page.locator('.login-sep21__button-signup');
         this.forgotLoginOrPassword = page.locator('.login-sep21__bottom-links a');
         this.showHidePasswordButton = page.locator('.login-sep21__password-eye');
+        this.wrongLoginOrPassword = page.getByText('Wrong login or password',{ exact: true });
         
 
         

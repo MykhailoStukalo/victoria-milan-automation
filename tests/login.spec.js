@@ -2,21 +2,7 @@ import {test, expect} from '@playwright/test'
 import {LoginPage} from '../pages/LoginPage'
 import {CookieBanner} from '../pages/CookieBanner';
 import {LandingPage} from '../pages/LandingPage';
-import { applyCaptchaTestMode } from '../helpers/captcha.local.js';
-
-test.skip('TC-015 Verify successful login with valid credentials', async({page}) => {
-const loginPage = new LoginPage(page);
-const cookieBanner = new CookieBanner(page);
-const landingPage = new LandingPage(page);
-await loginPage.open('https://www.victoriamilan.com/');
-await cookieBanner.acceptCookies();
-await landingPage.clickLogin();
-await loginPage.login(
-     process.env.VM_USER_EMAIL,
-    process.env.VM_USER_PASSWORD
-);
-
-});
+import {applyCaptchaTestMode} from '../helpers/captcha.local.js';
 
 test('TC-009 Verify Language Selector is displayed on the Login Page', async({page}) => {
     const loginPage = new LoginPage(page);
@@ -101,3 +87,43 @@ test('TC-015 Verify login with valid credentials', async ({ page }) => {
 
   await expect(page).toHaveURL(/\/app(\/|$)/);
 });
+
+test('TC-017 Verify login with invalid credentials', async ({page}) => {
+    const loginPage = new LoginPage(page);
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+
+    await landingPage.open('https://www.victoriamilan.com/');
+    await applyCaptchaTestMode(page);
+    await cookieBanner.acceptCookies();
+    await landingPage.clickLogin();
+    await loginPage.emailInput.fill('test@example.com');
+    await loginPage.passwordInput.fill('pas123');
+    await loginPage.loginButton.click();
+    await expect (loginPage.wrongLoginOrPassword).toBeVisible();
+});
+
+test('TC-018 Verify login behavior when required fields are empty', async ({page}) => {
+    const loginPage = new LoginPage(page);
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+    await landingPage.open('https://www.victoriamilan.com/');
+    await applyCaptchaTestMode(page);
+    await cookieBanner.acceptCookies();
+    await landingPage.clickLogin();
+    await expect (loginPage.emailInput).toHaveValue('');
+    await expect (loginPage.passwordInput).toHaveValue('');
+    await expect (loginPage.loginButton).toBeDisabled();
+});
+
+test('TC-019 Verify Log In button remains disabled when CAPTCHA is not completed', async ({page}) => {
+    const loginPage = new LoginPage(page);
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+    await landingPage.open('https://www.victoriamilan.com/');
+    await applyCaptchaTestMode(page);
+    await cookieBanner.acceptCookies();
+    await landingPage.clickLogin();
+}
+
+)
