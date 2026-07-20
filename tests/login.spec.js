@@ -116,14 +116,4 @@ test('TC-018 Verify login behavior when required fields are empty', async ({page
     await expect (loginPage.loginButton).toBeDisabled();
 });
 
-test('TC-019 Verify Log In button remains disabled when CAPTCHA is not completed', async ({page}) => {
-    const loginPage = new LoginPage(page);
-    const landingPage = new LandingPage(page);
-    const cookieBanner = new CookieBanner(page);
-    await landingPage.open('https://www.victoriamilan.com/');
-    await applyCaptchaTestMode(page);
-    await cookieBanner.acceptCookies();
-    await landingPage.clickLogin();
-}
 
-)

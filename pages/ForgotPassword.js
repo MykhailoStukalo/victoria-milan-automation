@@ -7,5 +7,6 @@ export class ForgotPassword extends BasePage {
         this.forgotPasswordCaptcha = this.forgotPasswordModal.locator('.login-sep21__input_captcha');
         this.tryDifferentSymbols = this.forgotPasswordModal.locator('.forgot-password-sep21-modal__captcha-reload-wrapper a');
         this.getPassword = this.forgotPasswordModal.getByRole('button', {name: 'Get password'});
+        this.captchaImage = this.forgotPasswordModal.locator('.forgot-password-sep21-modal__captcha-image')
     }
 }
