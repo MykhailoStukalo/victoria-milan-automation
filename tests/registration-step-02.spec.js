@@ -13,12 +13,26 @@ test('TC-032 Verify relationship status selection', async({page}) => {
     await landingPage.ctaButtons.first().click();
     await registrationPage.genderMan.click();
     await registrationPage.relationshipSingle.click();
-    await expect (registrationPage.completedSubStep.getByText('Man', {exact: true})).toBeVisible();
-    await expect (registrationPage.relationshipSingle).toBeVisible();
+    await expect(registrationPage.completedSubStep.getByText('Single', {exact: true})).toBeVisible();
+    await expect(registrationPage.interestedInLabel).toBeVisible();
+   
+});
+
+test('TC-033 Verify Registration Step 3 UI elements are displayed', async({page}) => {
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+    const registrationPage = new RegistrationPage(page);
+
+    await landingPage.open('https://www.victoriamilan.com/');
+    await cookieBanner.acceptCookies();
+    await landingPage.ctaButtons.first().click();
+    await registrationPage.genderMan.click();
+    await registrationPage.relationshipSingle.click();
+    await expect(registrationPage.completedSubStep.getByText('Man', {exact: true})).toBeVisible();
+    await expect(registrationPage.completedSubStep.getByText('Single', {exact: true})).toBeVisible();
     await expect (registrationPage.interestedInOptions.getByText('Men', {exact: true})).toBeVisible();
     await expect (registrationPage.interestedInOptions.getByText('Women', {exact: true})).toBeVisible();
     await expect (registrationPage.interestedInOptions.getByText('Both', {exact: true})).toBeVisible();
 });
-
 
 

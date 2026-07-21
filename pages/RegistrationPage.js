@@ -19,5 +19,13 @@ export class RegistrationPage extends BasePage {
         this.interestedInWomen = page.getByText('Women', {exact: true});
         this.interestedInBoth = page.getByText('Both', {exact: true});
         this.interestedInOptions = page.locator('.ft-interested-in');
+        // Registration - Step 4
+        this.emailInput = page.getByPlaceholder('Email');
+        this.marketingAgreeButton = page.locator('.sign-up-quiz__marketing-agree-button').getByText('Sure!', {exact: true});
+        this.marketingDisagreeButton = page.locator('.sign-up-quiz__marketing-agree-button').getByText('No thanks', {exact: true});
+        this.reCaptchaFrame = page.locator("iframe[title*='reCAPTCHA']");
+        this.continueButton = page.locator('.ft-email-continue-registration-button');
+        this.termsAndConditionsCheckbox = page.getByRole('checkbox', {name: 'I have read and agree to the Terms of Use, Privacy policy and Cookie policy'});
+        
     }
 }
