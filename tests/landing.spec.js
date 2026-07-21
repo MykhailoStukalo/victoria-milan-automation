@@ -94,7 +94,7 @@ test('TC-008 Verify each footer link opens the correct page', async({page}) => {
     const expectedUrls = [
         "https://www.victoriamilan.com/en_US/sitemap/show",
         /^https:\/\/www\.loverevenue\.com\//,
-        "https://www.victoriamilan.com/articles/en/",
+        "https://www.victoriamilan.com/articles/",
         "https://www.victoriamilan.com/en_US/static/about-us",
         "https://www.victoriamilan.com/en_US/#/leadership",
         "https://www.victoriamilan.com/help-center",
