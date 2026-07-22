@@ -24,8 +24,19 @@ export class RegistrationPage extends BasePage {
         this.marketingAgreeButton = page.locator('.sign-up-quiz__marketing-agree-button').getByText('Sure!', {exact: true});
         this.marketingDisagreeButton = page.locator('.sign-up-quiz__marketing-agree-button').getByText('No thanks', {exact: true});
         this.reCaptchaFrame = page.locator("iframe[title*='reCAPTCHA']");
-        this.continueButton = page.locator('.ft-email-continue-registration-button');
+        this.continueButtonAfterEmail = page.locator('.ft-email-continue-registration-button');
         this.termsAndConditionsCheckbox = page.getByRole('checkbox', {name: 'I have read and agree to the Terms of Use, Privacy policy and Cookie policy'});
+        this.errorMessageInvalidEmail = page.locator('.ft-error-invalid');
+        this.errorMessageRequired = page.locator('.ft-error-required');
+        this.errorMessageTermsRequired = page.locator('.sign-up-quiz__agree-with-terms').locator('.error');
+        this.errorMessageCaptchaRequired = page.locator('.sign-up-quiz__captcha-wrapper').locator('.error');      
+        // Registration - Step 5
+        this.userNameField = page.locator('.ft-user-name');
+        this.continueButtonAfterUsername = page.locator('.ft-username-continue-registration-button');
+        this.userNameFillIN = 'tttesztNazik';
+        // Registration - Step 6
+        this.passwordInput = page.locator('.ft-user-password');
+        
         
     }
 }
