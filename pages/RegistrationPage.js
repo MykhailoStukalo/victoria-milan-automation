@@ -36,6 +36,7 @@ export class RegistrationPage extends BasePage {
         this.userNameFillIN = 'tttesztNazik';
         // Registration - Step 6
         this.passwordInput = page.locator('.ft-user-password');
+        this.errorMessageUsernameRequired = page.locator('.ft-username-error-required');                
         
         
     }

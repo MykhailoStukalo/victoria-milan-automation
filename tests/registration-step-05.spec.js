@@ -52,5 +52,53 @@ test('TC-042 Verify successful completion of Registration Step 5', async ({page}
     await registrationPage.continueButtonAfterUsername.click();
 
     await expect(registrationPage.passwordInput).toBeVisible();
+});
+
+test('TC-043 Verify registration with an empty username field', async ({page}) => {
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+    const registrationPage = new RegistrationPage(page);
+    const timestamp = Date.now();
+    const uniqueEmail = `testNazik+${timestamp}@gmail.com`;
+
+    await landingPage.open('https://www.victoriamilan.com/');
+    await cookieBanner.acceptCookies();
+    await applyCaptchaTestMode(page);
+    await landingPage.ctaButtons.first().click();
+    await registrationPage.genderMan.click();
+    await registrationPage.relationshipSingle.click();
+    await registrationPage.interestedInWomen.click();
+    await registrationPage.emailInput.fill(uniqueEmail);
+    await registrationPage.termsAndConditionsCheckbox.check();
+    await registrationPage.continueButtonAfterEmail.click();
+    await registrationPage.userNameField.fill('');
+    await registrationPage.continueButtonAfterUsername.click();
+
+    await expect(registrationPage.errorMessageUsernameRequired).toBeVisible();
+});
+
+test('TC-044 Verify the maximum username length', async ({page}) => {
+    const landingPage = new LandingPage(page);
+    const cookieBanner = new CookieBanner(page);
+    const registrationPage = new RegistrationPage(page);
+    const timestamp = Date.now();
+    const uniqueEmail = `testNazik+${timestamp}@gmail.com`;
+    const username26 = 'ttteszt' + 'a'.repeat(19);
+    
+
+    await landingPage.open('https://www.victoriamilan.com/');
+    await cookieBanner.acceptCookies();
+    await applyCaptchaTestMode(page);
+    await landingPage.ctaButtons.first().click();
+    await registrationPage.genderMan.click();
+    await registrationPage.relationshipSingle.click();
+    await registrationPage.interestedInWomen.click();
+    await registrationPage.emailInput.fill(uniqueEmail);
+    await registrationPage.termsAndConditionsCheckbox.check();
+    await registrationPage.continueButtonAfterEmail.click();
+    await registrationPage.userNameField.pressSequentially(username26);
+
+    const actualUsername = await registrationPage.userNameField.inputValue();
+    await expect(actualUsername).toHaveLength(25);
 
 });
